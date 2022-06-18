@@ -101,4 +101,7 @@ dependencies {
     def accompanist_version = '0.20.2'
     implementation "com.google.accompanist:accompanist-pager:$accompanist_version"
     implementation "com.google.accompanist:accompanist-pager-indicators:$accompanist_version"
+
+    //System Ui Controller
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.24.11-rc"
 }
