@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -25,8 +26,11 @@ import com.example.shoponline.R
 import com.example.shoponline.base.Screens
 import com.example.shoponline.model.dataclass.BottomNavItem
 import com.example.shoponline.ui.theme.ShopOnlineTheme
+import com.example.shoponline.view.home.ui.HomeScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,25 +73,24 @@ fun Theme() {
 fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screens.HomeScreen.route){
         composable(Screens.HomeScreen.route){
-            Text(text = "Home" , textAlign = TextAlign.Center , fontSize = 24.sp ,
-            color = Color.Black)
+            HomeScreen()
         }
 
         composable(Screens.CategoriesScreen.route){
             Text(text = "Category" , textAlign = TextAlign.Center , fontSize = 24.sp ,
-                color = Color.Black)
+                color = Color.Black , modifier =Modifier.fillMaxSize())
 
         }
 
         composable(Screens.SearchScreen.route){
             Text(text = "Search" , textAlign = TextAlign.Center , fontSize = 24.sp ,
-                color = Color.Black)
+                color = Color.Black ,modifier =Modifier.fillMaxSize())
 
         }
 
         composable(Screens.ProfileScreen.route){
             Text(text = "Profile" , textAlign = TextAlign.Center , fontSize = 24.sp ,
-                color = Color.Black)
+                color = Color.Black ,  modifier =Modifier.fillMaxSize())
 
         }
     }

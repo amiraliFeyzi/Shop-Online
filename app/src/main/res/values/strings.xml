@@ -4,4 +4,11 @@
     <string name="category">دسته بندی</string>
     <string name="search">جستجو</string>
     <string name="profile">پروفایل</string>
+    <string name="amazing">شگفت انگیز این هفته را از دست ندهید</string>
+    <string name="resumeAmazingProduct">ادامه محصولات شگفت انگیز-></string>
+    <string name="endOfAmazingProduct">زمان باقی مانده تا پایان محصولات شگفت انگیز:</string>
+    <string name="newWatches">جدیدترین ساعت های هوشمند</string>
+    <string name="newProducts">جدیدترین محصولات</string>
+    <string name="showAll">مشاهده همه-></string>
+    <string name="popularBrand">محبوب ترین برندها:</string>
 </resources>
