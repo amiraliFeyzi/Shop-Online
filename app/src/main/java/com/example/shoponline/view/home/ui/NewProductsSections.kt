@@ -22,6 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.shoponline.R
 import com.example.shoponline.model.dataclass.Product
+import com.example.shoponline.utils.functions.formatPricer
 import com.example.shoponline.view.home.HomeViewModel
 
 
@@ -107,7 +108,7 @@ fun ItemNewProducts(product: Product) {
 
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = "${product.price}تومان ",
+            text = "${formatPricer(product.price)}",
             color = Color.Red ,
             modifier = Modifier
                 .padding(end = 8.dp, bottom = 8.dp)

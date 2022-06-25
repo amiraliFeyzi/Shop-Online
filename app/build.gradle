@@ -103,5 +103,6 @@ dependencies {
     implementation "com.google.accompanist:accompanist-pager-indicators:$accompanist_version"
 
     //System Ui Controller
-    implementation "com.google.accompanist:accompanist-systemuicontroller:0.24.11-rc"
+    def uicontroller_version = "0.24.11-rc"
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$uicontroller_version"
 }

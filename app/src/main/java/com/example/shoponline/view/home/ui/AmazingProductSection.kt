@@ -23,6 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.shoponline.R
 import com.example.shoponline.model.dataclass.Product
+import com.example.shoponline.utils.functions.formatPricer
 import com.example.shoponline.view.home.HomeViewModel
 
 @Composable
@@ -189,7 +190,7 @@ fun ItemAmazingOfferProduct(
             )
 
             Text(
-                text = "${product.offprice} تومان" ,
+                text = "${formatPricer(product.offprice.toString())}" ,
                 fontWeight = FontWeight.Bold ,
                 textAlign = TextAlign.End ,
                 color = Color(0xFF7CB342),
@@ -203,7 +204,7 @@ fun ItemAmazingOfferProduct(
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = product.price,
+            text = "${formatPricer(product.price)}",
             color = Color.Red ,
             modifier = Modifier
                 .padding(end = 8.dp)
