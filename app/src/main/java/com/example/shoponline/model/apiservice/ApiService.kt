@@ -14,6 +14,9 @@ interface ApiService {
     @GET("getCategory.php")
     suspend fun getCategoryHome():List<Category>
 
+    @GET("getAllCategory.php")
+    suspend fun getAllCategory():List<Category>
+
     @GET("getAmazingOfferProduct.php")
     suspend fun getAmazingOffProduct():List<Product>
 
@@ -25,4 +28,6 @@ interface ApiService {
 
     @GET("getBrand.php")
     suspend fun getBrand():List<Brand>
+
+
 }

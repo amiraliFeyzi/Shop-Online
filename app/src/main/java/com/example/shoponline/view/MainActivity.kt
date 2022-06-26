@@ -26,6 +26,7 @@ import com.example.shoponline.R
 import com.example.shoponline.base.Screens
 import com.example.shoponline.model.dataclass.BottomNavItem
 import com.example.shoponline.ui.theme.ShopOnlineTheme
+import com.example.shoponline.view.categories.CategoryScreen
 import com.example.shoponline.view.home.ui.HomeScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
@@ -77,9 +78,7 @@ fun Navigation(navController: NavHostController) {
         }
 
         composable(Screens.CategoriesScreen.route){
-            Text(text = "Category" , textAlign = TextAlign.Center , fontSize = 24.sp ,
-                color = Color.Black , modifier =Modifier.fillMaxSize())
-
+            CategoryScreen()
         }
 
         composable(Screens.SearchScreen.route){

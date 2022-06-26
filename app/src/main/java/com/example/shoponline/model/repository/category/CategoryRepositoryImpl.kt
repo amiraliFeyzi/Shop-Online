@@ -11,4 +11,10 @@ class CategoryRepositoryImpl (private val categoryRemoteDataSource: CategoryData
             emit(categoryRemoteDataSource.getCategoryHome())
         }
     }
+
+    override suspend fun getAllCategory(): Flow<List<Category>> {
+        return flow{
+            emit(categoryRemoteDataSource.getAllCategory())
+        }
+    }
 }
