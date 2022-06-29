@@ -5,6 +5,7 @@ import com.example.shoponline.model.dataclass.Banner
 import com.example.shoponline.model.dataclass.Brand
 import com.example.shoponline.model.dataclass.Category
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -17,6 +18,9 @@ interface ApiService {
     @GET("getAllCategory.php")
     suspend fun getAllCategory():List<Category>
 
+    @GET("getDetailCategory.php")
+    suspend fun getDetailCategory(@Query("id")id:String):List<Category>
+
     @GET("getAmazingOfferProduct.php")
     suspend fun getAmazingOffProduct():List<Product>
 
@@ -28,6 +32,12 @@ interface ApiService {
 
     @GET("getBrand.php")
     suspend fun getBrand():List<Brand>
+
+    @GET("getPopularDetail.php")
+    suspend fun getPopularDetailProduct(@Query("id")id:String):List<Product>
+
+    @GET("getDetailNewProduct.php")
+    suspend fun getDetailNewProduct(@Query("id")id:String):List<Product>
 
 
 }

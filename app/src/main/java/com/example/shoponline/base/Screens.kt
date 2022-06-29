@@ -1,9 +1,6 @@
 package com.example.shoponline.base
 
-import com.example.shoponline.utils.variable.CATEGORIES_SCREEN
-import com.example.shoponline.utils.variable.HOME_SCREEN
-import com.example.shoponline.utils.variable.PROFILE_SCREEN
-import com.example.shoponline.utils.variable.SEARCH_SCREEN
+import com.example.shoponline.utils.variable.*
 
 
 sealed class Screens(val route:String){
@@ -11,4 +8,5 @@ sealed class Screens(val route:String){
     object CategoriesScreen:Screens(CATEGORIES_SCREEN)
     object SearchScreen:Screens(SEARCH_SCREEN)
     object ProfileScreen:Screens(PROFILE_SCREEN)
+    object DetailCategoryScreen:Screens(DETAIL_CATEGORY_SCREEN)
 }

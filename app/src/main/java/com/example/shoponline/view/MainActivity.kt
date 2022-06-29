@@ -25,8 +25,11 @@ import androidx.navigation.compose.rememberNavController
 import com.example.shoponline.R
 import com.example.shoponline.base.Screens
 import com.example.shoponline.model.dataclass.BottomNavItem
+import com.example.shoponline.model.dataclass.Category
 import com.example.shoponline.ui.theme.ShopOnlineTheme
+import com.example.shoponline.utils.variable.EXTRA_KEY_DATA
 import com.example.shoponline.view.categories.CategoryScreen
+import com.example.shoponline.view.detailcategory.ui.DetailCategoryScreen
 import com.example.shoponline.view.home.ui.HomeScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,7 +67,7 @@ fun Theme() {
 
     SideEffect {
         systemUiController.setStatusBarColor(
-            color = Color.Red
+            color = Color(0xFFE40404)
 
         )
     }
@@ -74,7 +77,7 @@ fun Theme() {
 fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screens.HomeScreen.route){
         composable(Screens.HomeScreen.route){
-            HomeScreen()
+            HomeScreen(navController)
         }
 
         composable(Screens.CategoriesScreen.route){
@@ -92,6 +95,18 @@ fun Navigation(navController: NavHostController) {
                 color = Color.Black ,  modifier =Modifier.fillMaxSize())
 
         }
+
+        composable(Screens.DetailCategoryScreen.route){
+            val category = navController.previousBackStackEntry?.savedStateHandle?.get<Category>(
+                EXTRA_KEY_DATA)
+            category?.let {
+                DetailCategoryScreen(navController , category)
+
+            }
+        }
+
+
+
     }
 }
 

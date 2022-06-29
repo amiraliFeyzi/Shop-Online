@@ -7,4 +7,7 @@ interface CategoryRepository {
     suspend fun getCategoryHome():Flow<List<Category>>
 
     suspend fun getAllCategory():Flow<List<Category>>
+
+    suspend fun getDetailCategory(id:String):Flow<List<Category>>
+
 }

@@ -9,17 +9,19 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navHostController: NavHostController) {
     Column(modifier = Modifier
         .verticalScroll(rememberScrollState())
         .fillMaxSize()
         ) {
+        ToolBar()
         Spacer(modifier = Modifier.height(20.dp))
         Slider()
         Spacer(modifier = Modifier.height(36.dp))
-        CategoryList()
+        CategoryList(navHostController)
         Spacer(modifier = Modifier.height(36.dp))
         AmazingOfferProduct()
         Spacer(modifier = Modifier.height(36.dp))

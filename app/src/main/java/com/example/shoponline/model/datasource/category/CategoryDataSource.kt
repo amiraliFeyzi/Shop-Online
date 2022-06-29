@@ -6,4 +6,6 @@ interface CategoryDataSource {
     suspend fun getCategoryHome():List<Category>
 
     suspend fun getAllCategory():List<Category>
+
+    suspend fun getDetailCategory(id:String):List<Category>
 }

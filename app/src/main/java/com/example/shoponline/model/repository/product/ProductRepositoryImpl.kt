@@ -17,4 +17,16 @@ class ProductRepositoryImpl (private val productRemoteDataSource:ProductDataSour
             emit(productRemoteDataSource.getNewProducts())
         }
     }
+
+    override suspend fun getPopularDetailProduct(id: String): Flow<List<Product>> {
+        return flow{
+            emit(productRemoteDataSource.getPopularDetailProduct(id))
+        }
+    }
+
+    override suspend fun getDetailNewProduct(id: String): Flow<List<Product>> {
+        return flow{
+            emit(productRemoteDataSource.getDetailNewProduct(id))
+        }
+    }
 }

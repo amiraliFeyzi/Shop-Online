@@ -11,4 +11,8 @@
     <string name="newProducts">جدیدترین محصولات</string>
     <string name="showAll">مشاهده همه-></string>
     <string name="popularBrand">محبوب ترین برندها:</string>
+    <string name="newProductsExist">جدیدترین کالاهای موجود:</string>
+    <string name="popularProducts">محبوب ترین کالاها:</string>
+    <string name="specialOffer">پیشنهاد ویژه</string>
+    <string name="availableInStock">موجود در انبار</string>
 </resources>

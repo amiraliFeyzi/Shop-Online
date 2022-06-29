@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -105,4 +106,7 @@ dependencies {
     //System Ui Controller
     def uicontroller_version = "0.24.11-rc"
     implementation "com.google.accompanist:accompanist-systemuicontroller:$uicontroller_version"
+
+    //ConstraintLayout
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"
 }

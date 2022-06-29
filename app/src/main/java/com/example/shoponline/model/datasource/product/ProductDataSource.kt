@@ -6,4 +6,8 @@ interface ProductDataSource {
     suspend fun getAmazingOffProduct():List<Product>
 
     suspend fun getNewProducts():List<Product>
+
+    suspend fun getPopularDetailProduct(id:String):List<Product>
+
+    suspend fun getDetailNewProduct(id:String):List<Product>
 }

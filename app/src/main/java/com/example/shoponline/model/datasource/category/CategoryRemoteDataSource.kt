@@ -10,4 +10,7 @@ class CategoryRemoteDataSource (private val apiService: ApiService):CategoryData
     override suspend fun getAllCategory(): List<Category> =
         apiService.getAllCategory()
 
+    override suspend fun getDetailCategory(id: String): List<Category> =
+        apiService.getDetailCategory(id)
+
 }

@@ -10,4 +10,10 @@ class ProductRemoteDataSource(private val apiService: ApiService):ProductDataSou
 
     override suspend fun getNewProducts(): List<Product> =
         apiService.getNewProducts()
+
+    override suspend fun getPopularDetailProduct(id: String): List<Product> =
+        apiService.getPopularDetailProduct(id)
+
+    override suspend fun getDetailNewProduct(id: String): List<Product> =
+        apiService.getDetailNewProduct(id)
 }

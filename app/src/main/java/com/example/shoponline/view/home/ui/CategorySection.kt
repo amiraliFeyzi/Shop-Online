@@ -1,6 +1,7 @@
 package com.example.shoponline.view.home.ui
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
@@ -15,12 +16,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.example.shoponline.base.Screens
 import com.example.shoponline.model.dataclass.Category
+import com.example.shoponline.utils.variable.EXTRA_KEY_DATA
 import com.example.shoponline.view.home.HomeViewModel
 
 @Composable
 fun CategoryList(
+    navHostController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val categoryList= viewModel.categoryList.collectAsState()
@@ -33,7 +38,7 @@ fun CategoryList(
         contentPadding = PaddingValues(start= 16.dp , end = 16.dp)
     ){
         items(categoryList.value.size){
-            ItemCategory(category = categoryList.value[it])
+            ItemCategory(category = categoryList.value[it] , navHostController)
         }
     }
 
@@ -41,10 +46,14 @@ fun CategoryList(
 
 
 @Composable
-fun ItemCategory(category: Category) {
+fun ItemCategory(category: Category , navHostController: NavHostController) {
     Column(
         modifier = Modifier
-            .wrapContentSize() ,
+            .wrapContentSize()
+            .clickable {
+                navHostController.currentBackStackEntry?.savedStateHandle?.set(EXTRA_KEY_DATA, category)
+                navHostController.navigate(Screens.DetailCategoryScreen.route)
+            },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {

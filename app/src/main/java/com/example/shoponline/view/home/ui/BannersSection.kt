@@ -1,6 +1,8 @@
 package com.example.shoponline.view.home.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -12,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
@@ -21,6 +24,23 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
+import com.example.shoponline.R
+
+@Composable
+fun ToolBar() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp)
+            .background(Color.Red)
+    ){
+        Image(
+            painter = painterResource(id = R.drawable.ic_baseline_shopping_cart_24),
+            contentDescription ="logoShop",
+            modifier =Modifier.align(Alignment.CenterEnd).padding(end = 8.dp)
+        )
+    }
+}
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
