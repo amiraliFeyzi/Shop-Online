@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Works File/Shopping/Shop Online/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.166" />
+        <entry key="..\:/Works File/Shopping/Shop Online/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.1035" />
+        <entry key="..\:/Works File/Shopping/Shop Online/app/src/main/res/drawable/ic_baseline_arrow_upward_24.xml" value="0.1035" />
         <entry key="..\:/Works File/Shopping/Shop Online/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.11" />
       </map>
     </option>
