@@ -22,7 +22,7 @@ fun DetailCategoryScreen(navHostController: NavHostController ,category: Categor
             .verticalScroll(rememberScrollState())
     ) {
         Toolbar(title = category.tittle , navHostController)
-        DetailCategory(category)
+        DetailCategory(navHostController,category)
         Spacer(modifier = Modifier.height(36.dp))
         NewProductDetailCategory()
         Spacer(modifier = Modifier.height(36.dp))

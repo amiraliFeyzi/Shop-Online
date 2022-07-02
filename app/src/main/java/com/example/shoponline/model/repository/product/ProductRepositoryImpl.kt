@@ -29,4 +29,11 @@ class ProductRepositoryImpl (private val productRemoteDataSource:ProductDataSour
             emit(productRemoteDataSource.getDetailNewProduct(id))
         }
     }
+
+    override suspend fun getCategoryDetailProduct(id: String): Flow<List<Product>> {
+        return flow{
+            emit(productRemoteDataSource.getCategoryDetailProduct(id))
+        }
+
+    }
 }

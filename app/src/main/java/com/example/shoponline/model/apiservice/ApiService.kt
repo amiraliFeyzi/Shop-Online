@@ -39,5 +39,9 @@ interface ApiService {
     @GET("getDetailNewProduct.php")
     suspend fun getDetailNewProduct(@Query("id")id:String):List<Product>
 
+    @GET("getCategoryDetailProduct.php")
+    suspend fun getCategoryDetailProduct(@Query("id")id:String):List<Product>
+
+
 
 }

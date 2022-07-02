@@ -13,5 +13,7 @@ interface ProductRepository {
 
     suspend fun getDetailNewProduct(id:String):Flow<List<Product>>
 
+    suspend fun getCategoryDetailProduct(id:String):Flow<List<Product>>
+
 
 }

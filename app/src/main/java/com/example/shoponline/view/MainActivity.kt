@@ -30,6 +30,7 @@ import com.example.shoponline.ui.theme.ShopOnlineTheme
 import com.example.shoponline.utils.variable.EXTRA_KEY_DATA
 import com.example.shoponline.view.categories.CategoryScreen
 import com.example.shoponline.view.detailcategory.ui.DetailCategoryScreen
+import com.example.shoponline.view.detailcategoryproduct.DetailCategoryProductScreen
 import com.example.shoponline.view.home.ui.HomeScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
@@ -105,6 +106,16 @@ fun Navigation(navController: NavHostController) {
             }
         }
 
+        composable(Screens.DetailCategoryProduct.route){
+            val category = navController.previousBackStackEntry?.arguments?.getParcelable<Category>(
+                EXTRA_KEY_DATA)
+
+            category?.let{
+                DetailCategoryProductScreen(category = it , navHostController = navController)
+            }
+
+        }
+
 
 
     }
@@ -137,7 +148,7 @@ fun BottomBar(
         BottomNavItem(
             Screens.ProfileScreen.route ,
             stringResource(id = R.string.profile),
-           R.drawable.ic_baseline_account_circle_24
+            R.drawable.ic_baseline_account_circle_24
         )
     )
     BottomNavigation(
@@ -176,7 +187,3 @@ fun BottomBar(
 
     }
 }
-
-
-
-
