@@ -15,4 +15,16 @@
     <string name="popularProducts">محبوب ترین کالاها:</string>
     <string name="specialOffer">پیشنهاد ویژه</string>
     <string name="availableInStock">موجود در انبار</string>
+    <string name="title_activity_detail_product">DetailProductActivity</string>
+    <string name="you_buy_this_product">شما با خرید این محصول</string>
+    <string name="receive25Point">25 امتیاز در کلاب دریافت می کنید</string>
+    <string name="similarProduct">محصولات مشابه:</string>
+    <string name="productFeatures">ویژگی های محصول:</string>
+    <string name="propertiesProduct">مشخصات فنی</string>
+    <string name="reviewProduct">معرفی اجمال محصول</string>
+    <string name="productComparison">مقایسه محصول</string>
+    <string name="priceChart">نمودار قیمت</string>
+    <string name="share">اشتراک گذاری</string>
+    <string name="addToCart">اضافه کردن به سبد خرید</string>
+    <string name="compareProduct">محصولات مناسب مقایسه</string>
 </resources>

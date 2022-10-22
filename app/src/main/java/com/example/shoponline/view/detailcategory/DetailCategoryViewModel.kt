@@ -1,5 +1,6 @@
 package com.example.shoponline.view.detailcategory
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.example.shoponline.base.BaseViewModel
 import com.example.shoponline.model.dataclass.Category
@@ -17,6 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailCategoryViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val categoryRepository: CategoryRepository,
     private val productRepository: ProductRepository):BaseViewModel() {
 
@@ -29,31 +31,38 @@ class DetailCategoryViewModel @Inject constructor(
     private val _detailNewProduct = MutableStateFlow<List<Product>>(listOf())
     val detailNewProduct = _detailNewProduct.asStateFlow()
 
+    private fun getCategoryId():String{
+        return savedStateHandle.get<String>("id")!!
+    }
+
+    init {
+        callRequest()
+    }
 
     //cal all request in this screen
-    fun callRequest(category: Category){
+    private fun callRequest(){
         viewModelScope.launch(Dispatchers.IO) {
-            async { fetchDetailCategory(category) }
-            async { fetchPopularDetailProduct(category) }
-            async { fetchDetailNewProduct(category) }
+            async { fetchDetailCategory() }
+            async { fetchPopularDetailProduct() }
+            async { fetchDetailNewProduct() }
         }
     }
 
-    private suspend fun fetchDetailCategory(category: Category){
-        categoryRepository.getDetailCategory(category.id).collectLatest {
+    private suspend fun fetchDetailCategory(){
+        categoryRepository.getDetailCategory(getCategoryId()).collectLatest {
                 _detailCategoryList.value = it
         }
     }
 
 
-    private suspend fun fetchPopularDetailProduct(category: Category){
-        productRepository.getPopularDetailProduct(category.id).collectLatest {
+    private suspend fun fetchPopularDetailProduct(){
+        productRepository.getPopularDetailProduct(getCategoryId()).collectLatest {
             _popularDetailProduct.value = it
         }
     }
 
-    private suspend fun fetchDetailNewProduct(category: Category){
-        productRepository.getDetailNewProduct(category.id).collectLatest {
+    private suspend fun fetchDetailNewProduct(){
+        productRepository.getDetailNewProduct(getCategoryId()).collectLatest {
             _detailNewProduct.value = it
         }
     }

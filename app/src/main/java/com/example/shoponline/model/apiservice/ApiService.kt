@@ -1,9 +1,6 @@
 package com.example.shoponline.model.apiservice
 
-import com.example.shoponline.model.dataclass.Product
-import com.example.shoponline.model.dataclass.Banner
-import com.example.shoponline.model.dataclass.Brand
-import com.example.shoponline.model.dataclass.Category
+import com.example.shoponline.model.dataclass.*
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -41,6 +38,26 @@ interface ApiService {
 
     @GET("getCategoryDetailProduct.php")
     suspend fun getCategoryDetailProduct(@Query("id")id:String):List<Product>
+
+    @GET("getImageProduct.php")
+    suspend fun getDetailImageProduct(@Query("id")id: String):List<ImageProduct>
+
+    @GET("getSimilarProduct.php")
+    suspend fun getSimilarProduct(@Query("category_id")categoryId:String):List<Product>
+
+    @GET("getOptionProduct.php")
+    suspend fun getOptionProduct(@Query("id")id:String):List<OptionProduct>
+
+    @GET("getPropertiesProduct.php")
+    suspend fun getPropertiesProduct(@Query("id")id:String):List<PropertiesProduct>
+
+    @GET("getReviewProduct.php")
+    suspend fun getReviewProduct(@Query("id")id:String):List<ReviewProduct>
+
+    @GET("getCompareProduct.php")
+    suspend fun getCompareProduct(@Query("category_id")categoryId:String):List<Product>
+
+
 
 
 

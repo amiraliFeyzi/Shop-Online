@@ -15,18 +15,18 @@ import com.example.shoponline.R
 import com.example.shoponline.model.dataclass.Category
 
 @Composable
-fun DetailCategoryScreen(navHostController: NavHostController ,category: Category) {
+fun DetailCategoryScreen(navHostController: NavHostController, tittle:String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        Toolbar(title = category.tittle , navHostController)
-        DetailCategory(navHostController,category)
+        Toolbar(title = tittle , navHostController)
+        DetailCategory(navHostController)
         Spacer(modifier = Modifier.height(36.dp))
-        NewProductDetailCategory()
+        NewProductDetailCategory(navHostController)
         Spacer(modifier = Modifier.height(36.dp))
-        PopularProductSection()
+        PopularProductSection(navHostController)
 
     }
 }

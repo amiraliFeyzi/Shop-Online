@@ -5,6 +5,7 @@ import com.example.shoponline.model.datasource.banner.BannerRemoteDataSource
 import com.example.shoponline.model.datasource.brand.BrandRemoteDataSource
 import com.example.shoponline.model.datasource.category.CategoryRemoteDataSource
 import com.example.shoponline.model.datasource.product.ProductRemoteDataSource
+import com.example.shoponline.model.datasource.product.featureproduct.FeatureProductRemoteDataSource
 import com.example.shoponline.model.repository.banner.BannerRepository
 import com.example.shoponline.model.repository.banner.BannerRepositoryImpl
 import com.example.shoponline.model.repository.brand.BrandRepository
@@ -13,6 +14,8 @@ import com.example.shoponline.model.repository.category.CategoryRepository
 import com.example.shoponline.model.repository.category.CategoryRepositoryImpl
 import com.example.shoponline.model.repository.product.ProductRepository
 import com.example.shoponline.model.repository.product.ProductRepositoryImpl
+import com.example.shoponline.model.repository.product.featureproduct.FeaturesProductRepository
+import com.example.shoponline.model.repository.product.featureproduct.FeaturesProductRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,5 +49,11 @@ object RepositoryModule {
     @Singleton
     fun provideBrandRepository(apiService: ApiService):BrandRepository{
         return BrandRepositoryImpl(BrandRemoteDataSource(apiService))
+    }
+
+    @Provides
+    @Singleton
+    fun provideFeaturesProductRepository(apiService: ApiService):FeaturesProductRepository{
+        return FeaturesProductRepositoryImpl(FeatureProductRemoteDataSource(apiService))
     }
 }

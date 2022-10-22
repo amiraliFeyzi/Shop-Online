@@ -1,6 +1,7 @@
 package com.example.shoponline.view.detailcategoryproduct
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Icon
@@ -8,36 +9,31 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterEnd
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.shoponline.R
-import com.example.shoponline.model.dataclass.Category
+import com.example.shoponline.base.Screens
 import com.example.shoponline.model.dataclass.Product
-import com.example.shoponline.utils.functions.formatPricer
+import com.example.shoponline.utils.functions.formatPrice
 import com.example.shoponline.view.detailcategory.ui.Toolbar
 
 @Composable
 fun DetailCategoryProductScreen(
     navHostController: NavHostController,
-    category: Category,
+    tittle:String,
     viewModel: DetailCategoryProductViewModel = hiltViewModel()
 ) {
-    viewModel.fetchDetailCategoryProduct(category)
     val listProduct = viewModel.listProduct.collectAsState()
     Column(modifier = Modifier.fillMaxSize()) {
-        Toolbar(title = category.tittle, navHostController = navHostController)
+        Toolbar(title = tittle, navHostController = navHostController)
         Spacer(modifier = Modifier.height(4.dp))
         LazyColumn(
             modifier = Modifier
@@ -45,7 +41,20 @@ fun DetailCategoryProductScreen(
                 .wrapContentHeight()
         ) {
             items(listProduct.value.size) {
-                ItemDetailCategoryProduct(listProduct.value[it])
+                ItemDetailCategoryProduct(listProduct.value[it]){product ->
+                    navHostController.navigate(Screens.DetailProduct.route+
+                            "/${product.id}" +
+                            "/${product.name}" +
+                            "/${product.brand}" +
+                            "/${product.category_id}" +
+                            "/${product.value_off}" +
+                            "/${product.price}" +
+                            "/${product.offprice}" +
+                            "/${product.category_id}"
+
+                    )
+
+                }
             }
         }
     }
@@ -53,12 +62,17 @@ fun DetailCategoryProductScreen(
 }
 
 @Composable
-fun ItemDetailCategoryProduct(product: Product) {
+fun ItemDetailCategoryProduct(
+     product: Product ,
+     onProductClick : (Product) -> Unit) {
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
+            .clickable {
+                onProductClick(product)
+            }
     ) {
 
         Column(
@@ -109,7 +123,7 @@ fun ItemDetailCategoryProduct(product: Product) {
             }
 
             Text(
-                text = product.price,
+                text = "${formatPrice(product.price)}",
                 color = Color.Red ,
                 textAlign = TextAlign.End ,
                 modifier = Modifier.padding(end= 8.dp).align(Alignment.End)

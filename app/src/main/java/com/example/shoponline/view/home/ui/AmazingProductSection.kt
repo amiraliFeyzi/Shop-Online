@@ -1,6 +1,7 @@
 package com.example.shoponline.view.home.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,14 +21,17 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.shoponline.R
+import com.example.shoponline.base.Screens
 import com.example.shoponline.model.dataclass.Product
-import com.example.shoponline.utils.functions.formatPricer
+import com.example.shoponline.utils.functions.formatPrice
 import com.example.shoponline.view.home.HomeViewModel
 
 @Composable
 fun AmazingOfferProduct(
+    navHostController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val amazingOfferProduct = viewModel.amazingOffProduct.collectAsState()
@@ -70,7 +74,18 @@ fun AmazingOfferProduct(
                     FirstItemAmazingOffer()
                 }
                 items(amazingOfferProduct.value.size){
-                    ItemAmazingOfferProduct(amazingOfferProduct.value[it])
+                    ItemAmazingOfferProduct(amazingOfferProduct.value[it]){ product->
+                        navHostController.navigate(Screens.DetailProduct.route+
+                                "/${product.id}" +
+                                "/${product.name}" +
+                                "/${product.brand}" +
+                                "/${product.category_id}" +
+                                "/${product.value_off}" +
+                                "/${product.price}" +
+                                "/${product.offprice}" +
+                                "/${product.category_id}"
+                        )
+                    }
                 }
             }
 
@@ -129,7 +144,8 @@ fun FirstItemAmazingOffer() {
 
 @Composable
 fun ItemAmazingOfferProduct(
-    product: Product
+    product: Product,
+    onProductClick :(Product) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -137,6 +153,9 @@ fun ItemAmazingOfferProduct(
             .width(200.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(Color.White)
+            .clickable {
+                onProductClick(product)
+            }
 
 
 
@@ -190,7 +209,7 @@ fun ItemAmazingOfferProduct(
             )
 
             Text(
-                text = "${formatPricer(product.offprice.toString())}" ,
+                text = "${formatPrice(product.offprice.toString())}" ,
                 fontWeight = FontWeight.Bold ,
                 textAlign = TextAlign.End ,
                 color = Color(0xFF7CB342),
@@ -204,7 +223,7 @@ fun ItemAmazingOfferProduct(
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "${formatPricer(product.price)}",
+            text = "${formatPrice(product.price)}",
             color = Color.Red ,
             modifier = Modifier
                 .padding(end = 8.dp)

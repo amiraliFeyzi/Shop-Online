@@ -3,8 +3,8 @@ package com.example.shoponline.view.detailcategory.ui
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,13 +27,11 @@ import com.example.shoponline.view.detailcategory.DetailCategoryViewModel
 @Composable
 fun DetailCategory(
     navHostController: NavHostController,
-    category: Category,
     viewModel:DetailCategoryViewModel = hiltViewModel()
 ) {
-    viewModel.callRequest(category)
     val detailCategoryList = viewModel.detailCategoryList.collectAsState()
     LazyVerticalGrid(
-        cells = GridCells.Fixed(2),
+        columns = GridCells.Fixed(2),
         modifier = Modifier.padding(start = 8.dp , end= 8.dp)
             .height(300.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -53,8 +51,7 @@ fun ItemDetailCategory(navHostController: NavHostController,category: Category) 
             .fillMaxWidth()
             .height(80.dp)
             .clickable {
-                navHostController.currentBackStackEntry?.arguments?.putParcelable(EXTRA_KEY_DATA , category)
-                navHostController.navigate(Screens.DetailCategoryProduct.route)
+                navHostController.navigate(Screens.DetailCategoryProduct.route+"/${category.id}"+"/${category.tittle}")
             }
         ,
         elevation = 8.dp,

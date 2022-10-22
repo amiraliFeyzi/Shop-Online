@@ -2,9 +2,11 @@ package com.example.shoponline.view.home.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -19,23 +21,28 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.shoponline.R
+import com.example.shoponline.base.Screens
 import com.example.shoponline.model.dataclass.Product
-import com.example.shoponline.utils.functions.formatPricer
+import com.example.shoponline.utils.functions.formatPrice
 import com.example.shoponline.view.home.HomeViewModel
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NewProducts(
+    navHostController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
+
     val newProducts = viewModel.newProductList.collectAsState()
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(800.dp)
+            .height(500.dp)
+            .padding(bottom = 32.dp)
     ) {
         Row(
             modifier = Modifier
@@ -62,10 +69,22 @@ fun NewProducts(
         Spacer(modifier = Modifier.height(12.dp))
 
         LazyVerticalGrid(
-            cells = GridCells.Fixed(3)
+            columns = GridCells.Fixed(3)
         ){
             items(newProducts.value.size){
-                ItemNewProducts(product = newProducts.value[it])
+                ItemNewProducts(product = newProducts.value[it]){product->
+                    navHostController.navigate(Screens.DetailProduct.route+
+                            "/${product.id}" +
+                            "/${product.name}" +
+                            "/${product.brand}" +
+                            "/${product.category_id}" +
+                            "/${product.value_off}" +
+                            "/${product.price}" +
+                            "/${product.offprice}" +
+                            "/${product.category_id}"
+
+                    )
+                }
             }
         }
 
@@ -73,13 +92,16 @@ fun NewProducts(
 }
 
 @Composable
-fun ItemNewProducts(product: Product) {
+fun ItemNewProducts(product: Product , onProductClick:(Product)-> Unit) {
     Column(
         modifier = Modifier
             .scale(1.01f)
             .border(
                 width = 1.dp, Color.Gray
             )
+            .clickable {
+                onProductClick(product)
+            }
 
     ) {
         AsyncImage(
@@ -108,7 +130,7 @@ fun ItemNewProducts(product: Product) {
 
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = "${formatPricer(product.price)}",
+            text = "${formatPrice(product.price)}",
             color = Color.Red ,
             modifier = Modifier
                 .padding(end = 8.dp, bottom = 8.dp)

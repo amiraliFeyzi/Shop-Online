@@ -1,5 +1,6 @@
 package com.example.shoponline.model.repository.product
 
+import com.example.shoponline.model.dataclass.ImageProduct
 import com.example.shoponline.model.dataclass.Product
 import com.example.shoponline.model.datasource.product.ProductDataSource
 import kotlinx.coroutines.flow.Flow
@@ -35,5 +36,23 @@ class ProductRepositoryImpl (private val productRemoteDataSource:ProductDataSour
             emit(productRemoteDataSource.getCategoryDetailProduct(id))
         }
 
+    }
+
+    override suspend fun getDetailImageProduct(id: String): Flow<List<ImageProduct>> {
+        return flow{
+            emit(productRemoteDataSource.getDetailImageProduct(id))
+        }
+    }
+
+    override suspend fun getSimilarProduct(categoryId: String): Flow<List<Product>> {
+        return flow{
+            emit(productRemoteDataSource.getSimilarProduct(categoryId))
+        }
+    }
+
+    override suspend fun getCompareProduct(categoryId: String): Flow<List<Product>> {
+        return flow{
+            emit(productRemoteDataSource.getCompareProduct(categoryId))
+        }
     }
 }

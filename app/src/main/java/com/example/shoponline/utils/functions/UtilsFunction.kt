@@ -4,7 +4,7 @@ import android.text.SpannableString
 import android.text.style.RelativeSizeSpan
 import java.text.DecimalFormat
 
-fun formatPricer(
+fun formatPrice(
     price:String,
     unitRelativeSizeFactor: Float = 0.7f
 ):SpannableString{

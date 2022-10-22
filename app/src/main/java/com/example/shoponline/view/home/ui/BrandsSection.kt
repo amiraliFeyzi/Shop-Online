@@ -2,8 +2,9 @@ package com.example.shoponline.view.home.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -46,7 +47,7 @@ fun Brand(
         )
 
         LazyVerticalGrid(
-            cells = GridCells.Fixed(3),
+            columns = GridCells.Fixed(3),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(300.dp),

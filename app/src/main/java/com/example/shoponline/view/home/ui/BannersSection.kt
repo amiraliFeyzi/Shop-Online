@@ -4,8 +4,9 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -27,7 +28,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.example.shoponline.R
 
 @Composable
-fun ToolBar() {
+fun HomeToolBar() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -113,7 +114,7 @@ fun SuggestionsBanner(
             .padding(start = 8.dp, end = 8.dp)
     ){
         LazyVerticalGrid(
-            cells = GridCells.Fixed(2),
+            columns = GridCells.Fixed(2),
             content ={
                 items(suggestionBannerList.value.size){
                     ItemBanner(banner = suggestionBannerList.value[it])

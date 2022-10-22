@@ -1,9 +1,8 @@
 package com.example.shoponline.view.categories
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -17,17 +16,17 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.shoponline.model.dataclass.Category
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CategoryScreen(
     viewModel: CategoryViewModel = hiltViewModel()
 ) {
     val categoryList = viewModel.categoryList.collectAsState()
     LazyVerticalGrid(
-        cells = GridCells.Fixed(2),
-        modifier = Modifier.fillMaxSize().padding(start = 8.dp , end= 8.dp),
+        columns = GridCells.Fixed(2),
+        modifier = Modifier.fillMaxSize().padding(start = 8.dp , end= 8.dp , top = 12.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+
     ){
         items(categoryList.value.size){
             ItemCategory(category = categoryList.value[it])

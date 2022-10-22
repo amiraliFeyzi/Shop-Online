@@ -51,8 +51,7 @@ fun ItemCategory(category: Category , navHostController: NavHostController) {
         modifier = Modifier
             .wrapContentSize()
             .clickable {
-                navHostController.currentBackStackEntry?.savedStateHandle?.set(EXTRA_KEY_DATA, category)
-                navHostController.navigate(Screens.DetailCategoryScreen.route)
+                navHostController.navigate(Screens.DetailCategoryScreen.route+"/${category.id}" + "/${category.tittle}")
             },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween

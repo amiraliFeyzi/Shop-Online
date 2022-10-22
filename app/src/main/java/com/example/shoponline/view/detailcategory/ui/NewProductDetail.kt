@@ -1,6 +1,7 @@
 package com.example.shoponline.view.detailcategory.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,14 +19,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.shoponline.R
+import com.example.shoponline.base.Screens
 import com.example.shoponline.model.dataclass.Product
-import com.example.shoponline.utils.functions.formatPricer
+import com.example.shoponline.utils.functions.formatPrice
 import com.example.shoponline.view.detailcategory.DetailCategoryViewModel
 
 @Composable
 fun NewProductDetailCategory(
+    navHostController: NavHostController,
     viewModel:DetailCategoryViewModel = hiltViewModel()
 ) {
     val detailNewProduct = viewModel.detailNewProduct.collectAsState()
@@ -62,7 +66,19 @@ fun NewProductDetailCategory(
                 }
 
                 items(detailNewProduct.value.size){
-                    ItemNewDetailProduct(product = detailNewProduct.value[it])
+                    ItemNewDetailProduct(product = detailNewProduct.value[it]){product ->
+                        navHostController.navigate(Screens.DetailProduct.route+
+                                "/${product.id}" +
+                                "/${product.name}" +
+                                "/${product.brand}" +
+                                "/${product.category_id}" +
+                                "/${product.value_off}" +
+                                "/${product.price}" +
+                                "/${product.offprice}" +
+                                "/${product.category_id}"
+
+                        )
+                    }
 
                 }
             }
@@ -108,7 +124,8 @@ fun FirstItemDetailNewProduct() {
 
 @Composable
 fun ItemNewDetailProduct(
-    product: Product
+    product: Product ,
+    onProductClick : (Product) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -116,6 +133,10 @@ fun ItemNewDetailProduct(
             .width(200.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(Color.White)
+            .clickable {
+                onProductClick(product)
+            }
+
 
     ) {
         AsyncImage(
@@ -148,7 +169,7 @@ fun ItemNewDetailProduct(
 
 
         Text(
-            text = "${formatPricer(product.price)}" ,
+            text = "${formatPrice(product.price)}" ,
             fontWeight = FontWeight.Bold ,
             color = Color.Red,
             modifier = Modifier

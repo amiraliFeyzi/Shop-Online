@@ -1,6 +1,7 @@
 package com.example.shoponline.view.detailcategory.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Icon
@@ -18,14 +19,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.shoponline.R
+import com.example.shoponline.base.Screens
 import com.example.shoponline.model.dataclass.Product
-import com.example.shoponline.utils.functions.formatPricer
+import com.example.shoponline.utils.functions.formatPrice
 import com.example.shoponline.view.detailcategory.DetailCategoryViewModel
 
 @Composable
 fun PopularProductSection(
+    navHostController: NavHostController,
     viewModel : DetailCategoryViewModel  = hiltViewModel()
 ) {
     val popularProductDetail = viewModel.popularDetailProduct.collectAsState()
@@ -51,7 +55,19 @@ fun PopularProductSection(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ){
             items(popularProductDetail.value.size){
-                ItemPopularProduct(product = popularProductDetail.value[it])
+                ItemPopularProduct( product = popularProductDetail.value[it]){product ->
+                    navHostController.navigate(Screens.DetailProduct.route+
+                            "/${product.id}" +
+                            "/${product.name}" +
+                            "/${product.brand}" +
+                            "/${product.category_id}" +
+                            "/${product.value_off}" +
+                            "/${product.price}" +
+                            "/${product.offprice}" +
+                            "/${product.category_id}"
+
+                    )
+                }
             }
         }
 
@@ -61,12 +77,16 @@ fun PopularProductSection(
 
 @Composable
 fun ItemPopularProduct(
-    product: Product
+    product: Product,
+    onProductClick : (Product) -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
+            .clickable {
+                onProductClick(product)
+            }
     ) {
         Text(
             text = stringResource(id = R.string.specialOffer),
@@ -150,7 +170,7 @@ fun ItemPopularProduct(
             )
 
             Text(
-                text = "${formatPricer(product.offprice.toString())}",
+                text = "${formatPrice(product.offprice.toString())}",
                 color = Color(0xFF7CB342),
                 modifier = Modifier
                     .constrainAs(productOff){
@@ -161,7 +181,7 @@ fun ItemPopularProduct(
             )
 
             Text(
-                text= "${formatPricer(product.price)}" ,
+                text= "${formatPrice(product.price)}" ,
                 color = Color.Red ,
                 style = TextStyle(textDecoration = TextDecoration.LineThrough),
                 fontSize = 12.sp,

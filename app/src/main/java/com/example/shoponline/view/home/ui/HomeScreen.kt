@@ -13,23 +13,24 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun HomeScreen(navHostController: NavHostController) {
+
     Column(modifier = Modifier
         .verticalScroll(rememberScrollState())
         .fillMaxSize()
         ) {
-        ToolBar()
+        HomeToolBar()
         Spacer(modifier = Modifier.height(20.dp))
         Slider()
         Spacer(modifier = Modifier.height(36.dp))
         CategoryList(navHostController)
         Spacer(modifier = Modifier.height(36.dp))
-        AmazingOfferProduct()
+        AmazingOfferProduct(navHostController)
         Spacer(modifier = Modifier.height(36.dp))
         SuggestionsBanner()
         Spacer(modifier = Modifier.height(36.dp))
         NewWatch()
         Spacer(modifier = Modifier.height(36.dp))
-        NewProducts()
+        NewProducts(navHostController)
         Spacer(modifier = Modifier.height(36.dp))
         Brand()
     }

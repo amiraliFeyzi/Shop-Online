@@ -1,5 +1,6 @@
 package com.example.shoponline.model.dataclass
 
+
 data class Product(
     val brand: String,
     val category_id: String,
@@ -12,6 +13,4 @@ data class Product(
     val new:String ,
     val view:String,
     val sold:String ,
-
-
 )
